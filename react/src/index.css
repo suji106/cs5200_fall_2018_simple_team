@@ -1,0 +1,120 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+}
+
+
+.clickable-card{
+
+  cursor: pointer;
+
+}
+
+.searchBar{
+
+  margin-bottom: 20Px;
+  margin-top: 20px;
+}
+
+
+.projectTitle{
+
+  text-align: center;
+
+}
+
+.input-group{
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.input-group1{
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+
+.login-buttons{
+
+  margin-top: 30px;
+  margin-bottom: 10px;
+
+}
+.profile-container{
+
+  margin-top: 20px;
+}
+.lang-list{
+
+  margin-left: 30px;
+
+
+}
+
+.heading-project{
+
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.add-project{
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+
+
+}
+.projects-list{
+  margin-top: 10px;
+
+}
+
+.registration{
+  margin-top: 30px;
+  margin-bottom: 10px;
+
+
+}
+
+.navbar-collapse.collapse.in {
+  display: block!important;
+}
+
+.tile-button{
+
+  margin-left:5px;
+  margin-top:5px;
+}
+.commentBox{
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  border: 1px solid grey;
+  padding: 2px;
+
+
+}
+.app-container{
+  margin-top:15px;
+  margin-bottom: 15px;
+
+}
+
+
+.app-container1{
+  margin-top:30px;
+  margin-bottom: 30px;
+
+}
+
+.project-delete{
+  margin-top: 10px;
+}
+
+a{
+  cursor: pointer;
+}
+
