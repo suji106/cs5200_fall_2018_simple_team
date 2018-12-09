@@ -2,7 +2,7 @@ import React from 'react';
 import MovieTile from "../components/MovieTile";
 import MovieService from "../services/MovieService";
 import UserService from "../services/UserService";
-import OwnerMovies from "./OwnerMovies"
+import SecretaryMovies from "./SecretaryMovies"
 import MyMovies from "./MyMovies"
 import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
@@ -50,9 +50,9 @@ class MyMoviesEditor extends React.Component {
 decideMyMovies(){
 
         let user = this.state.userType;
-        if(user==="Owner"){
+        if(user==="Secretary"){
 
-            return <OwnerMovies />
+            return <SecretaryMovies />
         }
 
         else{

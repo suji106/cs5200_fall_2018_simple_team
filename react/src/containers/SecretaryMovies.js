@@ -2,7 +2,7 @@ import React from 'react';
 import MovieService from "../services/MovieService";
 import MovieTile from '../components/MovieTile'
 
-class OwnerMovies extends React.Component {
+class SecretaryMovies extends React.Component {
     constructor() {
         super();
         this.linkChanged = this.linkChanged.bind(this);
@@ -124,4 +124,4 @@ class OwnerMovies extends React.Component {
     }
 }
 
-export default OwnerMovies;
+export default SecretaryMovies;

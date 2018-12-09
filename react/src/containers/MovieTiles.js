@@ -141,7 +141,7 @@ class MovieTiles extends React.Component {
                         <div className="input-group mb-3 col-6 ">
 
                             <div className="input-group-prepend">
-                                <span className="input-group-text" id="">Filter by Languages, Genre, or Cast</span>
+                                <span className="input-group-text" id="">Filter by Languages, Genres, or Cast</span>
                             </div>
                             <input onChange={this.searchChanged} value={this.state.searchTerm} type="text"
                                    className="form-control" placeholder="enter languages, genres, or cast"

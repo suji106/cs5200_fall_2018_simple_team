@@ -15,7 +15,7 @@ class Login extends React.Component {
         this.normalLogin = this.normalLogin.bind(this);
 
         this.state = {
-            userType: "Owner",
+            userType: "Secretary",
             email: "",
             password: "",
             requests: []
@@ -126,7 +126,7 @@ class Login extends React.Component {
                                 </div>
                                 <select onChange={this.userTypeChanged} value={this.state.userType}
                                         className="form-control">
-                                    <option selected="selected" value="Owner">Owner</option>
+                                    <option selected="selected" value="Secretary">Secretary</option>
                                     <option value="Viewer">Viewer</option>
                                     <option value="Critic">Critic</option>
                                 </select>

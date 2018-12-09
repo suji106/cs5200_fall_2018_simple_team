@@ -10,7 +10,7 @@ export default class PendingRequests
         super(props);
         this.accept = this.accept.bind(this);
         this.reject=this.reject.bind(this);
-        this.state={contriRequests:[], mentorRequests:[], admin:false};
+        this.state={contriRequests:[], criticRequests:[], admin:false};
         this.requestService = RequestService.instance;
         this.updateRequests = this.updateRequests.bind(this);
         this.updateLogin = this.updateLogin.bind(this);
@@ -48,7 +48,7 @@ this.updateLogin();
 
     updateRequests(){
         this.requestService.getContriRequests(this.props.movieId).then(requests => this.setState({contriRequests:requests}));
-        this.requestService.getCriticRequests(this.props.movieId).then(requests => this.setState({mentorRequests:requests}));
+        this.requestService.getCriticRequests(this.props.movieId).then(requests => this.setState({criticRequests:requests}));
     }
 
     render() {
@@ -72,13 +72,12 @@ this.updateLogin();
                         </div>
                     </div>
                     </div>
-
                     ))}
             </div>
 
-                <h5>Pending Criticing Requests</h5>
+                <h5>Pending Critiquing Requests</h5>
                 <div className="row app-container1">
-                    {this.state.mentorRequests.map(request => (
+                    {this.state.criticRequests.map(request => (
                         <div className="col-sm-3 ">
                             <div className="card  bg-light" >
 

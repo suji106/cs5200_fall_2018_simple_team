@@ -6,10 +6,10 @@ import MovieService from "../services/MovieService";
 import RequestService from '../services/RequestService'
 import {Link} from 'react-router-dom';
 import UserService from "../services/UserService";
-import GenerateMeeting from "../components/GenerateMeeting"
-import MeetingTiles from "../components/MeetingTiles";
+import GenerateScreening from "../components/GenerateScreening"
+import ScreeningTiles from "../components/ScreeningTiles";
 import {Redirect} from 'react-router-dom';
-import CommentsList from "./CommentList";
+import ReviewsList from "./ReviewList";
 
 
 class MovieDetail extends React.Component {
@@ -49,7 +49,7 @@ class MovieDetail extends React.Component {
 
     showDelete() {
 
-        if (this.state.typeofUser === "Admin" || this.state.userType === "ownerAcc") {
+        if (this.state.typeofUser === "Admin" || this.state.userType === "secretaryAcc") {
             return true;
         }
         return false;
@@ -68,14 +68,14 @@ class MovieDetail extends React.Component {
 
     }
 
-    mentorLogic(mentorStatus) {
+    criticLogic(criticStatus) {
 
 
-        switch (mentorStatus) {
+        switch (criticStatus) {
 
             case "accepted":
 
-                this.setState({userType: "mentorAcc", displayTop: true, displayCom: true})
+                this.setState({userType: "criticAcc", displayTop: true, displayCom: true})
 
                 return;
 
@@ -83,7 +83,7 @@ class MovieDetail extends React.Component {
             case "rejected":
 
                 this.setState({
-                    userType: "mentorRej",
+                    userType: "criticRej",
                     displayTop: true
                 })
                 return;
@@ -91,7 +91,7 @@ class MovieDetail extends React.Component {
 
             case "pending": {
                 this.setState({
-                    userType: "mentorPen",
+                    userType: "criticPen",
                     displayTop: true
                 })
                 return;
@@ -100,7 +100,7 @@ class MovieDetail extends React.Component {
 
             default:
                 this.setState({
-                    userType: "mentor",
+                    userType: "critic",
                     displayTop: true
                 });
                 return;
@@ -109,18 +109,18 @@ class MovieDetail extends React.Component {
         }
     }
 
-    contributorLogic(contributorStatus) {
+    viewerLogic(viewerStatus) {
 
-        switch (contributorStatus) {
+        switch (viewerStatus) {
             case "accepted":
 
-                this.setState({userType: "contributorAcc", displayTop: true, displayCom: true})
+                this.setState({userType: "viewerAcc", displayTop: true, displayCom: true})
 
                 return;
             case "rejected":
 
                 this.setState({
-                    userType: "contributorRej",
+                    userType: "viewerRej",
                     displayTop: true
                 });
                 return;
@@ -128,7 +128,7 @@ class MovieDetail extends React.Component {
 
             case "pending":
                 this.setState({
-                    userType: "contributorPen",
+                    userType: "viewerPen",
                     displayTop: true
                 });
                 return;
@@ -136,7 +136,7 @@ class MovieDetail extends React.Component {
 
             default:
                 this.setState({
-                    userType: "contributor",
+                    userType: "viewer",
                     displayTop: true
                 });
                 return;
@@ -153,15 +153,15 @@ class MovieDetail extends React.Component {
 
         let user = this.state.typeofUser;
         console.log(user)
-        if (user === "Owner") {
+        if (user === "Secretary") {
 
             this.movieService.ownMovie(movieId).then(res => {
 
-                if (res.isOwner === "true") {
+                if (res.isSecretary === "true") {
                     this.setState({
                         displayTop: true,
                         displayCom: true,
-                        userType: "ownerAcc"
+                        userType: "secretaryAcc"
                     })
                 }
                 ;
@@ -180,13 +180,13 @@ class MovieDetail extends React.Component {
         if (user === "Critic") {
 
             this.RequestService.getRequestStatus(movieId).then(res => {
-                this.mentorLogic(res.status)
+                this.criticLogic(res.status)
             })
         }
 
         if (user === "Viewer") {
             this.RequestService.getRequestStatus(movieId).then(res => {
-                this.contributorLogic(res.status)
+                this.viewerLogic(res.status)
             })
 
         }
@@ -205,18 +205,18 @@ class MovieDetail extends React.Component {
                         </div>
 
                         <div className="app-container">
-                            <h5>Would you like to host a meeting?</h5>
-                            <GenerateMeeting movieId={this.props.location.state.movie.id}/>
+                            <h5>Would you like to host a screening?</h5>
+                            <GenerateScreening movieId={this.props.location.state.movie.id}/>
                         </div>
 
                         <div className="app-container">
-                            <h5>Upcoming Meetings</h5>
-                            <MeetingTiles movieId={this.props.location.state.movie.id}/>
+                            <h5>Upcoming Screenings</h5>
+                            <ScreeningTiles movieId={this.props.location.state.movie.id}/>
                         </div>
                     </div>
                 );
                 break;
-            case "contributorRej":
+            case "viewerRej":
                 return (
                     <div>
 
@@ -226,7 +226,7 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "contributorPen":
+            case "viewerPen":
                 return (
                     <div>
 
@@ -236,41 +236,41 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "mentorRej":
+            case "criticRej":
                 return (
                     <div>
 
-                        <h6>we are sorry to inform that your request for mentoring has been rejected</h6>
+                        <h6>we are sorry to inform that your request for criticing has been rejected</h6>
 
                     </div>
                 );
                 break;
 
-            case "mentorPen":
+            case "criticPen":
                 return (
                     <div>
 
-                        <h6>Your request for mentoring is still pending</h6>
+                        <h6>Your request for criticing is still pending</h6>
 
                     </div>
                 );
                 break;
 
-            case "ownerAcc":
+            case "secretaryAcc":
                 return (
                     <div>
                         <div className="app-container">
                             <PendingRequests movieId={this.props.location.state.movie.id}/>
                         </div>
                         <div>
-                            <h5>Upcoming Meetings</h5>
-                            <MeetingTiles movieId={this.props.location.state.movie.id}/>
+                            <h5>Upcoming Screenings</h5>
+                            <ScreeningTiles movieId={this.props.location.state.movie.id}/>
                         </div>
                     </div>
                 );
                 break;
 
-            case "contributor":
+            case "viewer":
                 return (
                     <div>
                         <h5>Would you like to contribute to this movie?</h5>
@@ -279,35 +279,35 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "mentor":
+            case "critic":
                 return (
                     <div className="app-container">
-                        <h5>Would you like to mentor this movie?</h5>
+                        <h5>Would you like to critic this movie?</h5>
                         <GenerateRequest movieId={this.props.location.state.movie.id}/>
                     </div>
                 );
                 break;
 
-            case "mentorAcc":
+            case "criticAcc":
                 return (
                     <div>
                         <div className="app-container">
-                            <h5>Would you like to host a meeting?</h5>
-                            <GenerateMeeting movieId={this.props.location.state.movie.id}/>
+                            <h5>Would you like to host a screening?</h5>
+                            <GenerateScreening movieId={this.props.location.state.movie.id}/>
                         </div>
                         <div className="app-container">
-                            <h3>Upcoming Meetings</h3>
-                            <MeetingTiles movieId={this.props.location.state.movie.id}/>
+                            <h3>Upcoming Screenings</h3>
+                            <ScreeningTiles movieId={this.props.location.state.movie.id}/>
                         </div>
                     </div>
                 );
                 break;
 
-            case "contributorAcc":
+            case "viewerAcc":
                 return (
                     <div className="app-container">
-                        <h5>Upcoming Meetings</h5>
-                        <MeetingTiles movieId={this.props.location.state.movie.id}/>
+                        <h5>Upcoming Screenings</h5>
+                        <ScreeningTiles movieId={this.props.location.state.movie.id}/>
                     </div>
                 );
                 break;
@@ -378,7 +378,7 @@ class MovieDetail extends React.Component {
                         <MoviePartners movieId={this.props.location.state.movie.id}
                                        getMembers={this.RequestService.getViewers}/>
                     </div>
-                    {this.state.displayCom && <CommentsList movieId={this.props.location.state.movie.id}/>}
+                    {this.state.displayCom && <ReviewsList movieId={this.props.location.state.movie.id}/>}
 
 
                 </div>

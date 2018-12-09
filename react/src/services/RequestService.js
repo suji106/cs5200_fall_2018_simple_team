@@ -33,27 +33,27 @@ class RequestService {
 
     getContriRequests(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/contributors/pending',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/viewers/pending',{
             credentials: 'include'}).then(response => response.json());
     }
 
 
     getCriticRequests(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/mentors/pending',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/critics/pending',{
 
             credentials: 'include'}).then(response => response.json());
     }
 
     getViewers(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/contributors/accepted',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/viewers/accepted',{
 
             credentials: 'include'}).then(response => response.json());
     }
     getCritics(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/mentors/accepted',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/critics/accepted',{
 
             credentials: 'include'}).then(response => response.json());
     }

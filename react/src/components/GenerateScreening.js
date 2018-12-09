@@ -2,36 +2,36 @@ import React from 'react';
 
 
 
-class GenerateMeeting extends React.Component {
+class GenerateScreening extends React.Component {
     constructor() {
         super();
         //this.MovieService = MovieService.instance;
         this.titleChanged = this.titleChanged.bind(this);
         this.messageChanged = this.messageChanged.bind(this);
-        this.createMeeting = this.createMeeting.bind(this);
+        this.createScreening = this.createScreening.bind(this);
         this.locationChanged = this.locationChanged.bind(this);
         this.dateChanged = this.dateChanged.bind(this);
         this.state ={
             title:"",
             message:"",
             location:"",
-            meetingDate:""
+            screeningDate:""
         }
 
 
     }
 
 
-    createMeeting(){
+    createScreening(){
 
-        let meeting ={
+        let screening ={
             title:this.state.title,
             message:this.state.message,
             location:this.state.location,
-            time:this.state.meetingDate
+            time:this.state.screeningDate
         }
-        fetch("https://moviewalk.herokuapp.com/api/"+this.props.movieId +"/meeting", {
-            body: JSON.stringify(meeting),
+        fetch("https://moviewalk.herokuapp.com/api/"+this.props.movieId +"/screening", {
+            body: JSON.stringify(screening),
             headers: {
                 'Content-Type': 'application/json'
             },
@@ -39,7 +39,7 @@ class GenerateMeeting extends React.Component {
             credentials:"include"
         }).then(function (response) {
             return response.json();
-        }).then(response => {alert("meeting added");
+        }).then(response => {alert("screening added");
         window.location.reload()});
 
 
@@ -50,7 +50,7 @@ class GenerateMeeting extends React.Component {
 
     dateChanged(event) {
         this.setState({
-            meetingDate:
+            screeningDate:
             event.target.value
 
         });
@@ -89,9 +89,9 @@ class GenerateMeeting extends React.Component {
                 <div className="input-group mb-3">
 
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="">Meeting title</span>
+                        <span className="input-group-text" id="">Screening title</span>
                     </div>
-                    <input onChange={this.titleChanged} type="text" className="form-control" placeholder="enter the title of the meeting"
+                    <input onChange={this.titleChanged} type="text" className="form-control" placeholder="enter the title of the screening"
                     />
 
                 </div >
@@ -99,9 +99,9 @@ class GenerateMeeting extends React.Component {
                 <div className="input-group mb-3">
 
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="">Meeting Location</span>
+                        <span className="input-group-text" id="">Screening Location</span>
                     </div>
-                    <input onChange={this.locationChanged} type="text" className="form-control" placeholder="enter the meeting location"
+                    <input onChange={this.locationChanged} type="text" className="form-control" placeholder="enter the screening location"
                     />
 
                 </div >
@@ -109,19 +109,19 @@ class GenerateMeeting extends React.Component {
 
                 <div className="input-group ">
                     <div className="input-group-prepend">
-                        <span className="input-group-text">Meeting Time</span>
+                        <span className="input-group-text">Screening Time</span>
                     </div>
                     <input type="datetime-local" onChange={this.dateChanged}/>
                 </div>
 
                 <div className="input-group ">
                     <div className="input-group-prepend">
-                        <span className="input-group-text">Meeting Agenda </span>
+                        <span className="input-group-text">Screening Agenda </span>
                     </div>
                     <textarea onChange={this.messageChanged} className="form-control" aria-label="With textarea"></textarea>
                 </div>
 
-                <button type="button" className="btn btn-success btn-block"  onClick={this.createMeeting}>Add Meeting</button>
+                <button type="button" className="btn btn-success btn-block"  onClick={this.createScreening}>Add Screening</button>
 
             </div>
 
@@ -130,4 +130,4 @@ class GenerateMeeting extends React.Component {
         )
     }
 }
-export default GenerateMeeting;
+export default GenerateScreening;

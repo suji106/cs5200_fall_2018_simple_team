@@ -1,18 +1,18 @@
 let _singleton = Symbol();
 const COMMENT__URL =
-    'https://moviewalk.herokuapp.com/api/PID/comment';
+    'https://moviewalk.herokuapp.com/api/PID/review';
 
-class CommentService {
+class ReviewService {
     constructor(singletonToken) {
         if (_singleton !== singletonToken)
             throw new Error('Cannot instantiate directly.');
     }
 
-    createComment(comment, movieId) {
+    createReview(review, movieId) {
 
         return fetch(COMMENT__URL.replace('PID', movieId),
             {
-                body: JSON.stringify({comment: comment}),
+                body: JSON.stringify({review: review}),
                 headers: {
                     'Content-Type': 'application/json'
                 },
@@ -22,9 +22,9 @@ class CommentService {
         ).then(res =>  res.json());
     }
 
-    deleteComment(commentID){
+    deleteReview(reviewID){
 
-        return fetch('https://moviewalk.herokuapp.com/api/comment/'+commentID,{
+        return fetch('https://moviewalk.herokuapp.com/api/review/'+reviewID,{
             method:'delete',
             credentials: 'include'});
     }
@@ -32,11 +32,11 @@ class CommentService {
 
     static get instance() {
         if (!this[_singleton])
-            this[_singleton] = new CommentService(_singleton);
+            this[_singleton] = new ReviewService(_singleton);
         return this[_singleton]
     }
 
 
 }
 
-export default CommentService;
+export default ReviewService;

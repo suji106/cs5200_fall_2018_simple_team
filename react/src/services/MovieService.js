@@ -34,13 +34,13 @@ class MovieService {
 
 
     ownMovie(movieId) {
-        return fetch('https://moviewalk.herokuapp.com/api/movie/' + movieId + '/owner', {
+        return fetch('https://moviewalk.herokuapp.com/api/movie/' + movieId + '/secretary', {
             credentials: 'include'
         }).then(response => response.json());
     }
 
     getOwnedMovies(movieId) {
-        return fetch('https://moviewalk.herokuapp.com/api/movies/owner', {
+        return fetch('https://moviewalk.herokuapp.com/api/movies/secretary', {
             credentials: 'include'
         }).then(response => response.json());
     }

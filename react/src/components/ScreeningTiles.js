@@ -1,19 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MeetingService from "../services/MeetingService";
+import ScreeningService from "../services/ScreeningService";
 import UserService from "../services/UserService";
 
 
-export default class MeetingTiles
+export default class ScreeningTiles
     extends React.Component {
     constructor(props) {
         super(props);
-        this.state={meetings:[],admin:false};
+        this.state={screenings:[],admin:false};
         this.updateLogin = this.updateLogin.bind(this);
-        this.MeetingService = MeetingService.instance;
+        this.ScreeningService = ScreeningService.instance;
         this.delete = this.delete.bind(this);
         this.UserService = UserService.instance;
-        this.updateMeetings = this.updateMeetings.bind(this);
+        this.updateScreenings = this.updateScreenings.bind(this);
     }
 
 
@@ -25,38 +25,38 @@ export default class MeetingTiles
             }})
 
     }
-    delete(meetingId){
+    delete(screeningId){
         if(!window.confirm("are you sure, you want to delete?"))
         {return;}
-        this.MeetingService.deleteMeeting(meetingId)
-            .then(()=>{this.updateMeetings()});
+        this.ScreeningService.deleteScreening(screeningId)
+            .then(()=>{this.updateScreenings()});
     }
 
-    updateMeetings(){
+    updateScreenings(){
 
-        this.MeetingService.getMeetings(this.props.movieId).then(meetings => this.setState({meetings:meetings}));
+        this.ScreeningService.getScreenings(this.props.movieId).then(screenings => this.setState({screenings:screenings}));
     }
 
     componentDidMount(){
 
-        this.updateMeetings();
+        this.updateScreenings();
         this.updateLogin();
     }
     render() {
         return (
             <div className="row app-container1">
-                {this.state.meetings.map(meeting => (
+                {this.state.screenings.map(screening => (
 
                     <div className="col-sm-3 ">
                     <div className="card  bg-light" >
 
                         <div className="card-body">
-                            <h2 className="card-title">{meeting.title}</h2>
-                            <p className="card-text">{meeting.message}</p>
-                            <p className="card-text">{meeting.location}</p>
-                            <p className="card-text">{new Date(meeting.time).toLocaleString()}</p>
+                            <h2 className="card-title">{screening.title}</h2>
+                            <p className="card-text">{screening.message}</p>
+                            <p className="card-text">{screening.location}</p>
+                            <p className="card-text">{new Date(screening.time).toLocaleString()}</p>
                             <Link to={'/profile/${this.request.user.id}'}></Link>
-                            {this.state.admin && <button className="btn btn-danger" onClick={() => {this.delete(meeting.id)}}>Delete</button>}
+                            {this.state.admin && <button className="btn btn-danger" onClick={() => {this.delete(screening.id)}}>Delete</button>}
                         </div>
                     </div>
                     </div>

@@ -59,13 +59,13 @@ class Profile extends React.Component {
     componentDidMount() {
         console.log("profileMounted");
         const profileUrl = "https://moviewalk.herokuapp.com/api/user/" + this.state.userId;
-        const contributorUrl = "https://moviewalk.herokuapp.com/api/user"
-        fetch(contributorUrl, {credentials: 'include'})
+        const viewerUrl = "https://moviewalk.herokuapp.com/api/user"
+        fetch(viewerUrl, {credentials: 'include'})
             .then(response => response.json())
-            .then(contributor => {
+            .then(viewer => {
                 fetch(profileUrl, {credentials: "include"}).then(response => (response.json()))
                     .then(profile => {
-                        if (contributor.id === this.state.userId) {
+                        if (viewer.id === this.state.userId) {
                             profile.loggedIn = true;
                             this.setState({
                                 profile: profile
@@ -86,7 +86,7 @@ class Profile extends React.Component {
             .then(movies => this.setState({
                 assocMovies: movies
             }));
-        fetch("https://moviewalk.herokuapp.com/api/movies/owner/" + this.state.userId, {
+        fetch("https://moviewalk.herokuapp.com/api/movies/secretary/" + this.state.userId, {
             credentials: 'include'
         })
             .then(response => (response.json()))

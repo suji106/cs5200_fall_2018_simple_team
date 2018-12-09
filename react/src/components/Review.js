@@ -1,8 +1,8 @@
 import React from 'react';
 import UserService from "../services/UserService";
-import CommentService from "../services/CommentService";
+import ReviewService from "../services/ReviewService";
 
-class Comment extends React.Component {
+class Review extends React.Component {
 
     constructor(props) {
         super(props);
@@ -10,7 +10,7 @@ class Comment extends React.Component {
         this.updateLogin = this.updateLogin.bind(this);
         this.delete = this.delete.bind(this);
         this.UserService = UserService.instance;
-        this.CommentService = CommentService.instance;
+        this.ReviewService = ReviewService.instance;
     }
 
     componentDidMount(){
@@ -26,11 +26,11 @@ class Comment extends React.Component {
 
     }
 
-    delete(commentId){
+    delete(reviewId){
         if(!window.confirm("are you sure, you want to delete?"))
         {return;}
-        this.CommentService.deleteComment(commentId)
-            .then(()=>{this.props.updateComments()});
+        this.ReviewService.deleteReview(reviewId)
+            .then(()=>{this.props.updateReviews()});
     }
 
     render() {
@@ -38,16 +38,16 @@ class Comment extends React.Component {
 
         return (
 
-                <div className="commentBox">
+                <div className="reviewBox">
 
-                    {this.state.admin && <button className="btn btn-danger float-right" onClick={() => {this.delete(this.props.commentObject.id)}}>Delete</button>}
+                    {this.state.admin && <button className="btn btn-danger float-right" onClick={() => {this.delete(this.props.reviewObject.id)}}>Delete</button>}
                     <div >
 
-                                        {this.props.commentObject.comment}
+                                        {this.props.reviewObject.review}
 
                     </div>
                     <h6>
-                        {this.props.commentObject.user.name} &nbsp;({this.props.commentObject.userType}) &nbsp; on {new Date(this.props.commentObject.created).toLocaleString()}
+                        {this.props.reviewObject.user.name} &nbsp;({this.props.reviewObject.userType}) &nbsp; on {new Date(this.props.reviewObject.created).toLocaleString()}
                     </h6>
 
                 </div>
@@ -56,4 +56,4 @@ class Comment extends React.Component {
     }
 }
 
-export default Comment;
+export default Review;
