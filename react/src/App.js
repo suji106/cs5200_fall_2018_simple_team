@@ -1,35 +1,27 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter as Router, Route} from 'react-router-dom'
-import ProjectTiles from './containers/ProjectTiles'
-import OwnerProjects from './containers/OwnerProjects'
-import Header from './containers/Header'
+import MovieTiles from './containers/MovieTiles'
 import Register from './containers/Register'
-import ProjectDetail from './containers/ProjectDetail'
+import MovieDetail from './containers/MovieDetail'
 import Login from './containers/Login'
-import MyProjectsEditor from "./containers/MyProjectsEditor";
+import MyMoviesEditor from "./containers/MyMoviesEditor";
 import Profile from './containers/Profile';
 import UserAdmin from "./containers/UserAdmin";
 import MyConnections from "./containers/MyConnections";
 
 class App extends Component {
 
-
     render() {
-
         return (
-
             <div>
                 <Router>
-
-
                     <div>
                         <Route path="/"
-                               exact component={ProjectTiles}>
+                               exact component={MovieTiles}>
                         </Route>
-                        <Route path="/projects"
-                               exact component={MyProjectsEditor}>
+                        <Route path="/movies"
+                               exact component={MyMoviesEditor}>
                         </Route>
 
                         <Route path="/register"
@@ -44,8 +36,8 @@ class App extends Component {
                                exact component={Profile}>
                         </Route>
 
-                        <Route path="/ProjectDetail"
-                               exact component={ProjectDetail}>
+                        <Route path="/MovieDetail"
+                               exact component={MovieDetail}>
                         </Route>
 
                         <Route path="/user-admin"
@@ -56,10 +48,8 @@ class App extends Component {
                                exact component={MyConnections}>
                         </Route>
                     </div>
-
                 </Router>
             </div>
-
         );
     }
 }
