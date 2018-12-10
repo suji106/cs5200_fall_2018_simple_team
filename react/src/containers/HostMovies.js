@@ -64,7 +64,7 @@ class HostMovies extends React.Component {
             this.MovieService.addMovie(newObj).then(() => {
                 // console.log(newObj);
                 alert("movie added successfully");
-                // window.location.reload();
+                window.location.reload(); 
             })
         });
     }

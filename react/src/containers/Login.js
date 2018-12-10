@@ -18,7 +18,7 @@ class Login extends React.Component {
             loginType: "Host",
             email: "",
             password: "",
-            requests: []
+            applications: []
         }
     }
 

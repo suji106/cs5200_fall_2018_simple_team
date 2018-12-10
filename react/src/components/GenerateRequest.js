@@ -5,7 +5,6 @@ import RequestService from '../services/RequestService'
 class GenerateRequest extends React.Component {
     constructor() {
         super();
-        //this.MovieService = MovieService.instance;
         this.detailsChanged = this.detailsChanged.bind(this);
         this.createRequest = this.createRequest.bind(this);
         this.RequestService = RequestService.instance;
@@ -18,7 +17,7 @@ class GenerateRequest extends React.Component {
         this.RequestService.createRequest(this.props.movieId, {details: this.state.details}).then(
             () => {
                 alert("request sent");
-                // window.location.reload()
+                window.location.reload()
             });
     }
 
@@ -35,12 +34,12 @@ class GenerateRequest extends React.Component {
                 <div className="input-group mb-3">
                     <div className="input-group ">
                         <div className="input-group-prepend">
-                            <span className="input-group-text">Your Role</span>
+                            <span className="input-group-text">Almost There ;)</span>
                         </div>
-                        <textarea onChange={this.detailsChanged} placeholder="How can you help us with this movie?"
+                        <textarea onChange={this.detailsChanged} placeholder="Why are you interested in the movie?"
                                   className="form-control" aria-label="With textarea"></textarea>
                     </div>
-                    <button type="button" className="btn btn-success" onClick={this.createRequest}>Send Request</button>
+                    <button type="button" className="btn btn-success" onClick={this.createRequest}>Send Application</button>
                 </div>
             </div>
         )

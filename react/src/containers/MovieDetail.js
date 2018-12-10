@@ -271,7 +271,7 @@ class MovieDetail extends React.Component {
             case "participant":
                 return (
                     <div>
-                        <h5>Would you like to contribute to this movie?</h5>
+                        <h5>Why would you like to be part of the screening?</h5>
                         <GenerateRequest movieId={this.props.location.state.movie.id}/>
                     </div>
                 );
@@ -280,7 +280,7 @@ class MovieDetail extends React.Component {
             case "critic":
                 return (
                     <div className="app-container">
-                        <h5>Would you like to critic this movie?</h5>
+                        <h5>Would you like to critique this movie?</h5>
                         <GenerateRequest movieId={this.props.location.state.movie.id}/>
                     </div>
                 );

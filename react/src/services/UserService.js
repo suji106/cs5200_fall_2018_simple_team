@@ -15,7 +15,7 @@ class UserService {
     }
 
     getRequests() {
-        return fetch('https://moviewalk.herokuapp.com/api/requests/user', {
+        return fetch('https://moviewalk.herokuapp.com/api/applications/user', {
             credentials: 'include'
         }).then(response => response.json()).catch(() => {
             return null;

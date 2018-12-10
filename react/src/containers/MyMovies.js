@@ -22,7 +22,7 @@ class MyMovies extends React.Component {
     componentDidMount() {
 
 
-        fetch("https://moviewalk.herokuapp.com/api/requests/accepted",{
+        fetch("https://moviewalk.herokuapp.com/api/applications/accepted",{
             credentials: 'include'})
 
             .then(response => (response.json()))
@@ -31,14 +31,14 @@ class MyMovies extends React.Component {
                 }));
 
 
-        fetch("https://moviewalk.herokuapp.com/api/requests/pending",{
+        fetch("https://moviewalk.herokuapp.com/api/applications/pending",{
             credentials: 'include'})
 
             .then(response => (response.json()))
             .then(movies => this.setState({
                 pending: movies
             }));
-        fetch("https://moviewalk.herokuapp.com/api/requests/rejected", {
+        fetch("https://moviewalk.herokuapp.com/api/applications/rejected", {
             credentials: 'include'})
 
             .then(response => (response.json()))
