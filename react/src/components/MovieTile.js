@@ -8,14 +8,14 @@ export default class MovieTile
     constructor(props) {
         super(props);
         this.onMovieClick = this.onMovieClick.bind(this);
-        this.state = {redirect: false, userType: "None"};
+        this.state = {redirect: false, loginType: "None"};
         this.UserService = UserService.instance;
     }
 
     componentDidMount() {
-        this.UserService.getUserType().then(res => {
-                if (res.userType !== "None") {
-                    this.setState({userType: res.userType})
+        this.UserService.getLoginType().then(res => {
+                if (res.loginType !== "None") {
+                    this.setState({loginType: res.loginType})
                 }
             }
         );
@@ -47,7 +47,7 @@ export default class MovieTile
 
     onMovieClick(event) {
         console.log("hi");
-        if (this.state.userType !== "None") {
+        if (this.state.loginType !== "None") {
 
             this.setState({redirect: true})
         }

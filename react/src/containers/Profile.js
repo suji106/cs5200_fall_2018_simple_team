@@ -59,13 +59,13 @@ class Profile extends React.Component {
     componentDidMount() {
         console.log("profileMounted");
         const profileUrl = "https://moviewalk.herokuapp.com/api/user/" + this.state.userId;
-        const viewerUrl = "https://moviewalk.herokuapp.com/api/user"
-        fetch(viewerUrl, {credentials: 'include'})
+        const participantUrl = "https://moviewalk.herokuapp.com/api/user"
+        fetch(participantUrl, {credentials: 'include'})
             .then(response => response.json())
-            .then(viewer => {
+            .then(participant => {
                 fetch(profileUrl, {credentials: "include"}).then(response => (response.json()))
                     .then(profile => {
-                        if (viewer.id === this.state.userId) {
+                        if (participant.id === this.state.userId) {
                             profile.loggedIn = true;
                             this.setState({
                                 profile: profile
@@ -86,7 +86,7 @@ class Profile extends React.Component {
             .then(movies => this.setState({
                 assocMovies: movies
             }));
-        fetch("https://moviewalk.herokuapp.com/api/movies/secretary/" + this.state.userId, {
+        fetch("https://moviewalk.herokuapp.com/api/movies/host/" + this.state.userId, {
             credentials: 'include'
         })
             .then(response => (response.json()))
@@ -262,7 +262,7 @@ class Profile extends React.Component {
                                 <Link className="nav-link" to='/movies'>My Movies</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to='/connections'>My Connections</Link>
+                                <Link className="nav-link" to='/connections'>My Network</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={this.logout}>Logout</a>

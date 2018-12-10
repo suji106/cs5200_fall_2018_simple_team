@@ -7,14 +7,14 @@ class GenerateScreening extends React.Component {
         super();
         //this.MovieService = MovieService.instance;
         this.titleChanged = this.titleChanged.bind(this);
-        this.messageChanged = this.messageChanged.bind(this);
+        this.detailsChanged = this.detailsChanged.bind(this);
         this.createScreening = this.createScreening.bind(this);
-        this.locationChanged = this.locationChanged.bind(this);
+        this.venueChanged = this.venueChanged.bind(this);
         this.dateChanged = this.dateChanged.bind(this);
         this.state ={
             title:"",
-            message:"",
-            location:"",
+            details:"",
+            venue:"",
             screeningDate:""
         }
 
@@ -26,10 +26,10 @@ class GenerateScreening extends React.Component {
 
         let screening ={
             title:this.state.title,
-            message:this.state.message,
-            location:this.state.location,
-            time:this.state.screeningDate
-        }
+            details:this.state.details,
+            venue:this.state.venue,
+            screeningTime:this.state.screeningDate
+        };
         fetch("https://moviewalk.herokuapp.com/api/"+this.props.movieId +"/screening", {
             body: JSON.stringify(screening),
             headers: {
@@ -56,9 +56,9 @@ class GenerateScreening extends React.Component {
         });
     }
 
-    locationChanged(event) {
+    venueChanged(event) {
         this.setState({
-            location:
+            venue:
             event.target.value
 
         });
@@ -74,9 +74,9 @@ class GenerateScreening extends React.Component {
     }
 
 
-    messageChanged(event) {
+    detailsChanged(event) {
         this.setState({
-            message:
+            details:
             event.target.value
 
         });
@@ -99,9 +99,9 @@ class GenerateScreening extends React.Component {
                 <div className="input-group mb-3">
 
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="">Screening Location</span>
+                        <span className="input-group-text" id="">Screening venue</span>
                     </div>
-                    <input onChange={this.locationChanged} type="text" className="form-control" placeholder="enter the screening location"
+                    <input onChange={this.venueChanged} type="text" className="form-control" placeholder="enter the screening venue"
                     />
 
                 </div >
@@ -118,7 +118,7 @@ class GenerateScreening extends React.Component {
                     <div className="input-group-prepend">
                         <span className="input-group-text">Screening Agenda </span>
                     </div>
-                    <textarea onChange={this.messageChanged} className="form-control" aria-label="With textarea"></textarea>
+                    <textarea onChange={this.detailsChanged} className="form-control" aria-label="With textarea"></textarea>
                 </div>
 
                 <button type="button" className="btn btn-success btn-block"  onClick={this.createScreening}>Add Screening</button>

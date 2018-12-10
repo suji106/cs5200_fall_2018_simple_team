@@ -21,6 +21,7 @@ class MovieService {
     }
 
     addMovie(movie) {
+        console.log(movie);
         return fetch("https://moviewalk.herokuapp.com/api/movie", {
             body: JSON.stringify(movie),
             headers: {
@@ -34,13 +35,13 @@ class MovieService {
 
 
     ownMovie(movieId) {
-        return fetch('https://moviewalk.herokuapp.com/api/movie/' + movieId + '/secretary', {
+        return fetch('https://moviewalk.herokuapp.com/api/movie/' + movieId + '/host', {
             credentials: 'include'
         }).then(response => response.json());
     }
 
     getOwnedMovies(movieId) {
-        return fetch('https://moviewalk.herokuapp.com/api/movies/secretary', {
+        return fetch('https://moviewalk.herokuapp.com/api/movies/host', {
             credentials: 'include'
         }).then(response => response.json());
     }

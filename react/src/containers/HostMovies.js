@@ -2,7 +2,7 @@ import React from 'react';
 import MovieService from "../services/MovieService";
 import MovieTile from '../components/MovieTile'
 
-class SecretaryMovies extends React.Component {
+class HostMovies extends React.Component {
     constructor() {
         super();
         this.linkChanged = this.linkChanged.bind(this);
@@ -34,25 +34,23 @@ class SecretaryMovies extends React.Component {
             console.log(movies);
             this.setState({movies: movies})
         });
-
-        // this.setState({
-        //     movies: [
-        //         {
-        //             id: 42,
-        //             languages: "English, Japanese, French",
-        //             summary: "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a CEO.",
-        //             title: "Inception",
-        //             url: "http://www.omdbapi.com/?apikey=c1cb9ddb&i=tt1375666",
-        //             cast: "Leonardo DiCaprio, Joseph Gordon-Levitt, Ellen Page, Tom Hardy",
-        //             genre: "Action, Adventure, Sci-Fi, Thriller",
-        //             poster: "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_SX300.jpg"
-        //         }
-        //     ]
-        // });
     }
 
     createMovie() {
-        fetch(this.state.link).then(response => response.json()).then(movie => {
+        let url = '';
+        if (this.state.link.includes('tt')) {
+            url = 'http://www.omdbapi.com/?apikey=c1cb9ddb&i=' + this.state.link;
+        }
+        else {
+            url = 'http://www.omdbapi.com/?apikey=c1cb9ddb&s=' + this.state.link;
+        }
+
+        fetch(url).then(response => {
+            let d = response.json();
+            // console.log(d);
+            return d;
+        }).then(movie => {
+            // console.log(movie);
             let key, keys = Object.keys(movie);
             let n = keys.length;
             let newObj = {};
@@ -64,9 +62,9 @@ class SecretaryMovies extends React.Component {
             newObj['summary'] = newObj['plot'];
             newObj['languages'] = newObj['language'];
             this.MovieService.addMovie(newObj).then(() => {
-                console.log(newObj);
+                // console.log(newObj);
                 alert("movie added successfully");
-                window.location.reload();
+                // window.location.reload();
             })
         });
     }
@@ -105,10 +103,10 @@ class SecretaryMovies extends React.Component {
                 <h4 className="add-movie"> Add a new Movie </h4>
                 <div className="input-group mb-3">
                     <div className="input-group-prepend">
-                        <span className="input-group-text" id="">Movie Content Link</span>
+                        <span className="input-group-text" id="">Enter Movie to Be Screened Movie</span>
                     </div>
                     <input onChange={this.linkChanged} type="text" className="form-control"
-                           placeholder="enter movie link"
+                           placeholder="enter movie name or id"
                     />
                 </div>
                 <button type="button" className="btn btn-success btn-block" onClick={this.createMovie}>Save</button>
@@ -124,4 +122,4 @@ class SecretaryMovies extends React.Component {
     }
 }
 
-export default SecretaryMovies;
+export default HostMovies;

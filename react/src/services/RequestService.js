@@ -1,6 +1,4 @@
 let _singleton = Symbol();
-const REQUEST_API_URL =
-    'https://moviewalk.herokuapp.com/api/request';
 
 class RequestService {
     constructor(singletonToken) {
@@ -14,7 +12,7 @@ class RequestService {
     }
 
     createRequest(movieId, request) {
-        return fetch("https://moviewalk.herokuapp.com/api/" + movieId + "/request", {
+        return fetch("https://moviewalk.herokuapp.com/api/" + movieId + "/application", {
             body: JSON.stringify(request),
             headers: {
                 'Content-Type': 'application/json'
@@ -26,34 +24,34 @@ class RequestService {
 
 
     getRequestStatus(movieId){
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/request',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/application',{
             credentials: 'include'}).then(response => response.json());
     }
 
 
     getContriRequests(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/viewers/pending',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/applications/participants/pending',{
             credentials: 'include'}).then(response => response.json());
     }
 
 
     getCriticRequests(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/critics/pending',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/applications/critics/pending',{
 
             credentials: 'include'}).then(response => response.json());
     }
 
-    getViewers(movieId){
+    getParticipants(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/viewers/accepted',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/applications/participants/accepted',{
 
             credentials: 'include'}).then(response => response.json());
     }
     getCritics(movieId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/requests/critics/accepted',{
+        return fetch('https://moviewalk.herokuapp.com/api/'+movieId+'/applications/critics/accepted',{
 
             credentials: 'include'}).then(response => response.json());
     }
@@ -61,21 +59,21 @@ class RequestService {
 
     acceptRequest(requestId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/request/accepted/'+requestId,{
+        return fetch('https://moviewalk.herokuapp.com/api/application/accepted/'+requestId,{
             method:'PUT',
             credentials: 'include'}).then(response => response.json());
     }
 
     rejectRequest(requestId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/request/rejected/'+requestId,{
+        return fetch('https://moviewalk.herokuapp.com/api/application/rejected/'+requestId,{
             method:'PUT',
             credentials: 'include'}).then(response => response.json());
     }
 
     deleteRequest(requestId){
 
-        return fetch('https://moviewalk.herokuapp.com/api/request/'+requestId,{
+        return fetch('https://moviewalk.herokuapp.com/api/application/'+requestId,{
             method:'delete',
             credentials: 'include'});
     }

@@ -23,7 +23,7 @@ class MovieTiles extends React.Component {
             movies: [],
             userId: '',
             changeProfile: false,
-            userType: ""
+            loginType: ""
         };
     }
 
@@ -53,13 +53,13 @@ class MovieTiles extends React.Component {
 
     updateLogin() {
 
-        this.UserService.getUserType().then(res => {
-                if (res.userType !== "None") {
-                    this.setState({loggedIn: true, userType: res.userType})
+        this.UserService.getLoginType().then(res => {
+                if (res.loginType !== "None") {
+                    this.setState({loggedIn: true, loginType: res.loginType})
                 }
 
                 else {
-                    this.setState({loggedIn: false, userType: res.userType})
+                    this.setState({loggedIn: false, loginType: res.loginType})
                 }
             }
         );
@@ -109,7 +109,7 @@ class MovieTiles extends React.Component {
                             </li>}
 
                             {this.state.loggedIn && <li className="nav-item">
-                                <Link className="nav-link" to='/connections'>My Connections</Link>
+                                <Link className="nav-link" to='/connections'>My Network</Link>
                             </li>}
 
 
@@ -117,7 +117,7 @@ class MovieTiles extends React.Component {
                                 <a className="nav-link" onClick={this.toProfile}>Profile</a>
                             </li>}
 
-                            {(this.state.userType === 'Admin') && <li className="nav-item">
+                            {(this.state.loginType === 'Admin') && <li className="nav-item">
                                 <Link className="nav-link" to='/user-admin'>User Admin</Link>
                             </li>}
 

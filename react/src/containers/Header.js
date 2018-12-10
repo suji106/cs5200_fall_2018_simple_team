@@ -14,7 +14,7 @@ export default class Header
 
     componentDidMount() {
 
-        this.UserService.getUserType().then(res => {
+        this.UserService.getLoginType().then(res => {
             if (res !== "None") {
                 this.setState({loggedIn: true})
             }

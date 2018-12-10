@@ -32,8 +32,8 @@ this.updateLogin();
 
     updateLogin(){
 
-        this.UserService.getUserType().then(res => {
-            if (res.userType === "Admin") {
+        this.UserService.getLoginType().then(res => {
+            if (res.loginType === "Admin") {
                 this.setState({admin: true})
             }})
 
@@ -55,7 +55,7 @@ this.updateLogin();
 
         return (
             <div >
-            <h5>Pending Viewer Requests</h5>
+            <h5>Pending Participant Requests</h5>
             <div className="row app-container1">
                 {this.state.contriRequests.map(request => (
                     <div className="col-sm-3 ">
@@ -64,7 +64,7 @@ this.updateLogin();
 
                         <div className="card-body">
                             <Link className="card-title" to={'/profile/'+request.user.id}><h5 className="card-title">{request.user.name}</h5></Link>
-                            <p className="card-text">{request.message}</p>
+                            <p className="card-text">{request.details}</p>
 
                             <button className="btn btn-success tile-button" onClick={() => {this.accept(request.id)}}>Accept</button>
                             <button className="btn btn-danger tile-button" onClick={() => {this.reject(request.id)}}>Reject</button>
@@ -85,7 +85,7 @@ this.updateLogin();
 
                             <div className="card-body">
                                 <Link to={'/profile/'+request.user.id}><h5 className="card-title">{request.user.name}</h5></Link>
-                                <p className="card-text">{request.message}</p>
+                                <p className="card-text">{request.details}</p>
 
                                 <button className="btn btn-success tile-button" onClick={() => {this.accept(request.id)}}>Accept</button>
                                 <button className="btn btn-danger tile-button" onClick={() => {this.reject(request.id)}}>Reject</button>

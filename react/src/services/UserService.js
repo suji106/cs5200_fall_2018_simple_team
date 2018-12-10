@@ -28,8 +28,8 @@ class UserService {
         })
     }
 
-    getUserType() {
-        return fetch('https://moviewalk.herokuapp.com/api/userType', {
+    getLoginType() {
+        return fetch('https://moviewalk.herokuapp.com/api/loginType', {
             credentials: 'include'
         }).then(response => response.json());
     }

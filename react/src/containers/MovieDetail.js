@@ -24,7 +24,7 @@ class MovieDetail extends React.Component {
         this.showDelete = this.showDelete.bind(this);
         this.delete = this.delete.bind(this);
 
-        this.state = {displayCom: false, userType: "", displayTop: false, typeofUser: "", redirect: false}
+        this.state = {displayCom: false, loginType: "", displayTop: false, typeofUser: "", redirect: false}
     }
 
 
@@ -49,7 +49,7 @@ class MovieDetail extends React.Component {
 
     showDelete() {
 
-        if (this.state.typeofUser === "Admin" || this.state.userType === "secretaryAcc") {
+        if (this.state.typeofUser === "Admin" || this.state.loginType === "hostAcc") {
             return true;
         }
         return false;
@@ -58,9 +58,9 @@ class MovieDetail extends React.Component {
 
     componentDidMount() {
 
-        this.UserService.getUserType().then(res => {
+        this.UserService.getLoginType().then(res => {
             if (res !== "None") {
-                this.setState({typeofUser: res.userType})
+                this.setState({typeofUser: res.loginType})
             }
             this.decideUser();
         });
@@ -75,7 +75,7 @@ class MovieDetail extends React.Component {
 
             case "accepted":
 
-                this.setState({userType: "criticAcc", displayTop: true, displayCom: true})
+                this.setState({loginType: "criticAcc", displayTop: true, displayCom: true})
 
                 return;
 
@@ -83,7 +83,7 @@ class MovieDetail extends React.Component {
             case "rejected":
 
                 this.setState({
-                    userType: "criticRej",
+                    loginType: "criticRej",
                     displayTop: true
                 })
                 return;
@@ -91,7 +91,7 @@ class MovieDetail extends React.Component {
 
             case "pending": {
                 this.setState({
-                    userType: "criticPen",
+                    loginType: "criticPen",
                     displayTop: true
                 })
                 return;
@@ -100,7 +100,7 @@ class MovieDetail extends React.Component {
 
             default:
                 this.setState({
-                    userType: "critic",
+                    loginType: "critic",
                     displayTop: true
                 });
                 return;
@@ -109,18 +109,18 @@ class MovieDetail extends React.Component {
         }
     }
 
-    viewerLogic(viewerStatus) {
+    participantLogic(participantStatus) {
 
-        switch (viewerStatus) {
+        switch (participantStatus) {
             case "accepted":
 
-                this.setState({userType: "viewerAcc", displayTop: true, displayCom: true})
+                this.setState({loginType: "participantAcc", displayTop: true, displayCom: true})
 
                 return;
             case "rejected":
 
                 this.setState({
-                    userType: "viewerRej",
+                    loginType: "participantRej",
                     displayTop: true
                 });
                 return;
@@ -128,7 +128,7 @@ class MovieDetail extends React.Component {
 
             case "pending":
                 this.setState({
-                    userType: "viewerPen",
+                    loginType: "participantPen",
                     displayTop: true
                 });
                 return;
@@ -136,7 +136,7 @@ class MovieDetail extends React.Component {
 
             default:
                 this.setState({
-                    userType: "viewer",
+                    loginType: "participant",
                     displayTop: true
                 });
                 return;
@@ -153,15 +153,15 @@ class MovieDetail extends React.Component {
 
         let user = this.state.typeofUser;
         console.log(user)
-        if (user === "Secretary") {
+        if (user === "Host") {
 
             this.movieService.ownMovie(movieId).then(res => {
 
-                if (res.isSecretary === "true") {
+                if (res.isHost === "true") {
                     this.setState({
                         displayTop: true,
                         displayCom: true,
-                        userType: "secretaryAcc"
+                        loginType: "hostAcc"
                     })
                 }
                 ;
@@ -172,7 +172,7 @@ class MovieDetail extends React.Component {
         if (user === "Admin") {
 
             this.setState({
-                userType: "Admin", displayTop: true,
+                loginType: "Admin", displayTop: true,
                 displayCom: true,
             })
         }
@@ -184,9 +184,9 @@ class MovieDetail extends React.Component {
             })
         }
 
-        if (user === "Viewer") {
+        if (user === "Participant") {
             this.RequestService.getRequestStatus(movieId).then(res => {
-                this.viewerLogic(res.status)
+                this.participantLogic(res.status)
             })
 
         }
@@ -194,9 +194,7 @@ class MovieDetail extends React.Component {
 
     headerJSX() {
 
-        switch (this.state.userType) {
-
-
+        switch (this.state.loginType) {
             case "Admin":
                 return (
                     <div>
@@ -216,7 +214,7 @@ class MovieDetail extends React.Component {
                     </div>
                 );
                 break;
-            case "viewerRej":
+            case "participantRej":
                 return (
                     <div>
 
@@ -226,7 +224,7 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "viewerPen":
+            case "participantPen":
                 return (
                     <div>
 
@@ -256,7 +254,7 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "secretaryAcc":
+            case "hostAcc":
                 return (
                     <div>
                         <div className="app-container">
@@ -270,7 +268,7 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "viewer":
+            case "participant":
                 return (
                     <div>
                         <h5>Would you like to contribute to this movie?</h5>
@@ -303,7 +301,7 @@ class MovieDetail extends React.Component {
                 );
                 break;
 
-            case "viewerAcc":
+            case "participantAcc":
                 return (
                     <div className="app-container">
                         <h5>Upcoming Screenings</h5>
@@ -324,8 +322,6 @@ class MovieDetail extends React.Component {
 
         return (
             <div>
-
-
                 <nav className="navbar navbar-expand-lg navbar-dark navbar-fixed-top">
                     <a className="navbar-brand" href="/">Simple Screens</a>
                     <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
@@ -342,7 +338,7 @@ class MovieDetail extends React.Component {
                             </li>
 
                             <li className="nav-item">
-                                <Link className="nav-link" to='/connections'>My Connections</Link>
+                                <Link className="nav-link" to='/connections'>My Network</Link>
                             </li>
 
                             <li className="nav-item">
@@ -358,6 +354,7 @@ class MovieDetail extends React.Component {
                     {this.showDelete() && <button className="btn btn-danger float-right movie-delete" onClick={() => {
                         this.delete(this.props.location.state.movie.id)
                     }}>Delete Movie</button>}
+                    {console.log(this.props)}
                     <h3 className="movieTitle"><a
                         href={this.props.location.state.movie.url}>{this.props.location.state.movie.title}</a></h3>
                     {this.state.displayTop && this.headerJSX()}
@@ -374,9 +371,10 @@ class MovieDetail extends React.Component {
                                        getMembers={this.RequestService.getCritics}/>
                     </div>
                     <div className="app-container">
-                        <h5>Viewers</h5>
+                        <h5>Participants</h5>
+                        {console.log(this.props.location)}
                         <MoviePartners movieId={this.props.location.state.movie.id}
-                                       getMembers={this.RequestService.getViewers}/>
+                                       getMembers={this.RequestService.getParticipants}/>
                     </div>
                     {this.state.displayCom && <ReviewsList movieId={this.props.location.state.movie.id}/>}
 

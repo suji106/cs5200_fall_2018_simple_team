@@ -11,11 +11,11 @@ class Login extends React.Component {
         this.login = this.login.bind(this);
 
         this.LoginService = LoginService.instance;
-        this.userTypeChanged = this.userTypeChanged.bind(this);
+        this.loginTypeChanged = this.loginTypeChanged.bind(this);
         this.normalLogin = this.normalLogin.bind(this);
 
         this.state = {
-            userType: "Secretary",
+            loginType: "Host",
             email: "",
             password: "",
             requests: []
@@ -30,7 +30,7 @@ class Login extends React.Component {
                 provider: type,
                 email: res.email,
                 user_pic: res.picture.data.url,
-                userType: this.state.userType
+                loginType: this.state.loginType
             };
         }
 
@@ -40,7 +40,7 @@ class Login extends React.Component {
                 provider: type,
                 email: res.w3.U3,
                 user_pic: res.w3.Paa,
-                userType: this.state.userType
+                loginType: this.state.loginType
             };
         }
 
@@ -57,7 +57,7 @@ class Login extends React.Component {
         this.LoginService.normalLogin({
             email: this.state.email,
             password: this.state.password,
-            userType: this.state.userType
+            loginType: this.state.loginType
         }).then(
             (res) => {
                 if (res !== null) {
@@ -86,9 +86,9 @@ class Login extends React.Component {
         });
     }
 
-    userTypeChanged(event) {
+    loginTypeChanged(event) {
         this.setState({
-            userType:
+            loginType:
             event.target.value
 
         });
@@ -124,10 +124,10 @@ class Login extends React.Component {
                                 <div className="input-group-prepend">
                                     <span className="input-group-text" id="">Login as</span>
                                 </div>
-                                <select onChange={this.userTypeChanged} value={this.state.userType}
+                                <select onChange={this.loginTypeChanged} value={this.state.loginType}
                                         className="form-control">
-                                    <option selected="selected" value="Secretary">Secretary</option>
-                                    <option value="Viewer">Viewer</option>
+                                    <option selected="selected" value="Host">Host</option>
+                                    <option value="Participant">Participant</option>
                                     <option value="Critic">Critic</option>
                                 </select>
                             </div>
