@@ -9,7 +9,7 @@ export default class MoviePartners
     constructor(props) {
         super(props);
         this.delete = this.delete.bind(this);
-        this.state = {requests: [], admin: false};
+        this.state = {applications: [], admin: false};
         this.RequestService = RequestService.instance;
         this.updateRequests = this.updateRequests.bind(this);
         this.updateLogin = this.updateLogin.bind(this);
@@ -39,7 +39,7 @@ export default class MoviePartners
     }
 
     updateRequests() {
-        this.props.getMembers(this.props.movieId).then(requests => this.setState({requests: requests}));
+        this.props.getMembers(this.props.movieId).then(applications => this.setState({applications: applications}));
 
     }
 
@@ -52,13 +52,12 @@ export default class MoviePartners
     render() {
         return (
             <div className="row app-container1">
-                {this.state.requests.map(request => (
+                {this.state.applications.map(request => (
                     <div className="col-sm-3 ">
                         <div className="card  bg-light">
                             <div className="card-body">
                                 <Link to={'/profile/' + request.user.id}>{request.user.name}</Link>
                                 <p className="card-text">{request.details}</p>
-
                                 {this.state.admin && <button className="btn btn-danger" onClick={() => {
                                     this.delete(request.id)
                                 }}>Delete</button>}
@@ -68,7 +67,6 @@ export default class MoviePartners
 
                 ))}
             </div>
-
         );
     }
 

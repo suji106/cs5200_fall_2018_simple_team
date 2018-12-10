@@ -47,8 +47,8 @@ this.updateLogin();
     }
 
     updateRequests(){
-        this.requestService.getContriRequests(this.props.movieId).then(requests => this.setState({contriRequests:requests}));
-        this.requestService.getCriticRequests(this.props.movieId).then(requests => this.setState({criticRequests:requests}));
+        this.requestService.getContriRequests(this.props.movieId).then(applications => this.setState({contriRequests:applications}));
+        this.requestService.getCriticRequests(this.props.movieId).then(applications => this.setState({criticRequests:applications}));
     }
 
     render() {

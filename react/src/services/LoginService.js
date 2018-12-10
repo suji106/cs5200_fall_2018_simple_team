@@ -61,7 +61,7 @@ class LoginService {
     }
 
     getRequests() {
-        return fetch('https://moviewalk.herokuapp.com/api/requests/user',{credentials: "same-origin"}).then(response => response.json()).
+        return fetch('https://moviewalk.herokuapp.com/api/applications/user',{credentials: "same-origin"}).then(response => response.json()).
         catch(() => {return null;});
     }
 }

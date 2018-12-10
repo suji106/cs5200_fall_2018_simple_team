@@ -79,7 +79,7 @@ class Profile extends React.Component {
                         }
                     });
             });
-        fetch("https://moviewalk.herokuapp.com/api/requests/accepted/" + this.state.userId, {
+        fetch("https://moviewalk.herokuapp.com/api/applications/accepted/" + this.state.userId, {
             credentials: 'include'
         })
             .then(response => (response.json()))
