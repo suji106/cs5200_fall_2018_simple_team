@@ -19,8 +19,8 @@ export default class ScreeningTiles
 
     updateLogin(){
 
-        this.UserService.getUserType().then(res => {
-            if (res.userType === "Admin") {
+        this.UserService.getLoginType().then(res => {
+            if (res.loginType === "Admin") {
                 this.setState({admin: true})
             }})
 
@@ -52,9 +52,9 @@ export default class ScreeningTiles
 
                         <div className="card-body">
                             <h2 className="card-title">{screening.title}</h2>
-                            <p className="card-text">{screening.message}</p>
-                            <p className="card-text">{screening.location}</p>
-                            <p className="card-text">{new Date(screening.time).toLocaleString()}</p>
+                            <p className="card-text">{screening.details}</p>
+                            <p className="card-text">{screening.venue}</p>
+                            <p className="card-text">{new Date(screening.screeningTime).toLocaleString()}</p>
                             <Link to={'/profile/${this.request.user.id}'}></Link>
                             {this.state.admin && <button className="btn btn-danger" onClick={() => {this.delete(screening.id)}}>Delete</button>}
                         </div>

@@ -2,7 +2,7 @@ import React from 'react';
 import MovieTile from "../components/MovieTile";
 import MovieService from "../services/MovieService";
 import UserService from "../services/UserService";
-import SecretaryMovies from "./SecretaryMovies"
+import HostMovies from "./HostMovies"
 import MyMovies from "./MyMovies"
 import {Link} from 'react-router-dom';
 import { Redirect } from 'react-router-dom';
@@ -16,7 +16,7 @@ class MyMoviesEditor extends React.Component {
         this.decideMyMovies = this.decideMyMovies.bind(this);
         this.logout = this.logout.bind(this);
         this.state ={
-            userType:"",
+            loginType:"",
             decide:false,
             loggedOut:false
 
@@ -28,10 +28,10 @@ class MyMoviesEditor extends React.Component {
 
 
 
-        this.UserService.getUserType().then(res => {
+        this.UserService.getLoginType().then(res => {
 
-                if (res.userType !== "None") {
-                    this.setState({userType: res.userType, decide:true})
+                if (res.loginType !== "None") {
+                    this.setState({loginType: res.loginType, decide:true})
                 }}
             );
 
@@ -49,10 +49,10 @@ class MyMoviesEditor extends React.Component {
 
 decideMyMovies(){
 
-        let user = this.state.userType;
-        if(user==="Secretary"){
+        let user = this.state.loginType;
+        if(user==="Host"){
 
-            return <SecretaryMovies />
+            return <HostMovies />
         }
 
         else{
@@ -84,7 +84,7 @@ decideMyMovies(){
                             </li>
 
                             <li className="nav-item">
-                                <Link className="nav-link" to='/connections'>My Connections</Link>
+                                <Link className="nav-link" to='/connections'>My Network</Link>
                             </li>
                             <li className="nav-item">
                                 <a className="nav-link" onClick={this.logout}>Logout</a>

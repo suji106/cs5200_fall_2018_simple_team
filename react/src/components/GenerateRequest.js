@@ -6,25 +6,25 @@ class GenerateRequest extends React.Component {
     constructor() {
         super();
         //this.MovieService = MovieService.instance;
-        this.messageChanged = this.messageChanged.bind(this);
+        this.detailsChanged = this.detailsChanged.bind(this);
         this.createRequest = this.createRequest.bind(this);
         this.RequestService = RequestService.instance;
         this.state = {
-            message: ""
+            details: ""
         }
     }
 
     createRequest() {
-        this.RequestService.createRequest(this.props.movieId, {message: this.state.message}).then(
+        this.RequestService.createRequest(this.props.movieId, {details: this.state.details}).then(
             () => {
                 alert("request sent");
-                window.location.reload()
+                // window.location.reload()
             });
     }
 
-    messageChanged(event) {
+    detailsChanged(event) {
         this.setState({
-            message:
+            details:
             event.target.value
         });
     }
@@ -37,7 +37,7 @@ class GenerateRequest extends React.Component {
                         <div className="input-group-prepend">
                             <span className="input-group-text">Your Role</span>
                         </div>
-                        <textarea onChange={this.messageChanged} placeholder="How can you help us with this movie?"
+                        <textarea onChange={this.detailsChanged} placeholder="How can you help us with this movie?"
                                   className="form-control" aria-label="With textarea"></textarea>
                     </div>
                     <button type="button" className="btn btn-success" onClick={this.createRequest}>Send Request</button>
